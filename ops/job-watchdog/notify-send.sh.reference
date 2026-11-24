@@ -1,0 +1,39 @@
+#!/bin/zsh
+# Sends every queued alert in outbox/ to the owner's phone as an iMessage, oldest first, then moves it to sent/.
+# Run by launchd (local.jobtools.job-notify) whenever outbox/ changes, and every 5 min as a safety net.
+set -u
+D="$HOME/Library/Application Support/job-watchdog"
+OUT="$D/outbox"; SENT="$D/sent"; LOG="$D/notify.log"
+TO="${JOB_PHONE_RECIPIENT}"
+mkdir -p "$OUT" "$SENT"
+for f in "$OUT"/*.txt(N); do
+  msg="$(cat "$f")"
+  [[ -z "$msg" ]] && { mv "$f" "$SENT/"; continue; }
+  if /usr/bin/osascript - "$msg" "$TO" <<'OSA' 2>>"$LOG"
+on run argv
+  set m to item 1 of argv
+  set who to item 2 of argv
+  tell application "Messages"
+    set svc to 1st account whose service type = iMessage
+    send m to participant who of svc
+  end tell
+end run
+OSA
+  then
+    mv "$f" "$SENT/"; rm -f "$f.shown"
+    echo "$(date '+%Y-%m-%d %H:%M:%S') sent" >> "$LOG"
+  else
+    # Messages could not send (often: macOS is still waiting for him to allow control of Messages).
+    # Keep it queued and retry every 5 min; show it on the Mac once; give up after 6 h.
+    echo "$(date '+%Y-%m-%d %H:%M:%S') not sent yet, will retry" >> "$LOG"
+    if [[ ! -f "$f.shown" ]]; then
+      touch "$f.shown"
+      /usr/bin/osascript -e "display notification \"${msg//\"/'}\" with title \"Job automation\" sound name \"Basso\"" 2>/dev/null
+    fi
+    if [[ -n "$(find "$f" -mmin +360 2>/dev/null)" ]]; then mkdir -p "$D/failed"; mv "$f" "$D/failed/"; rm -f "$f.shown"; fi
+    break
+  fi
+done
+# keep sent/ small
+find "$SENT" -name '*.txt' -mtime +7 -delete 2>/dev/null
+exit 0

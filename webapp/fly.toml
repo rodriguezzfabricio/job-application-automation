@@ -1,0 +1,28 @@
+# Fly config — first-hour-job-discovery (de-0002 webapp)
+# a12 Q36: first time = fly launch -> fly secrets set (six keys) ->
+# fly volumes create data -> fly deploy. Every later update = fly deploy.
+
+# Supply the app name with fly deploy --app YOUR_APP.
+
+primary_region = "ewr"
+
+[build]
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [[http_service.checks]]
+    interval = "15s"
+    timeout = "5s"
+    grace_period = "10s"
+    method = "GET"
+    path = "/healthz"
+
+[[mounts]]
+  source = "data"
+  destination = "/data"

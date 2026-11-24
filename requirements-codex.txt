@@ -1,0 +1,4 @@
+# Isolated job worker PDF runtime; Python standard library handles coordination.
+reportlab==5.1.0
+pillow==13.0.0
+charset-normalizer==3.5.2

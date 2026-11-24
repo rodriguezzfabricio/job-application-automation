@@ -1,0 +1,20 @@
+{
+  "synthetic": true,
+  "provenance": {
+    "selected_fixture_is_complete_feed": false
+  },
+  "job": {
+    "id": "99999999-0000-4000-8000-000000000001",
+    "title": "Graduate Systems Engineer",
+    "location": "Remote, US",
+    "isRemote": true,
+    "isListed": true,
+    "employmentType": "FullTime",
+    "workplaceType": "Remote",
+    "publishedAt": "2026-10-15T15:00:00Z",
+    "jobUrl": "https://jobs.ashbyhq.com/example/99999999-0000-4000-8000-000000000001",
+    "applyUrl": "https://jobs.ashbyhq.com/example/99999999-0000-4000-8000-000000000001/application",
+    "descriptionPlain": "Applicants must complete a degree in May 2031.",
+    "descriptionHtml": "<p>Applicants must complete a degree in May 2031.</p>"
+  }
+}

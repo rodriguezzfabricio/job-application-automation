@@ -1,0 +1,310 @@
+{
+  "cases": [
+    {
+      "id": "ind-01",
+      "description": "Requirements\nPython required.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "Python"
+          ]
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "eligible",
+      "why": "The mandatory Python requirement is supported by the source bullet Built a Python API.; the default new-grad, full-time, approved-location job meets the user rules."
+    },
+    {
+      "id": "ind-02",
+      "description": "Requirements\nReact required.\nPreferred Qualifications\nPython preferred.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "React"
+          ]
+        ],
+        [
+          "s2",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s3",
+          "skill",
+          "preferred",
+          [
+            "Python"
+          ]
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "eligible",
+      "why": "The mandatory React requirement is supported by Built a React interface.; preferred Python is also demonstrated and adds no exclusion."
+    },
+    {
+      "id": "ind-03",
+      "description": "Requirements\nPython required.\nNo visa sponsorship is offered.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "Python"
+          ]
+        ],
+        [
+          "s2",
+          "authorization",
+          "mandatory",
+          []
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "eligible",
+      "why": "The candidate is authorized to work in the US and needs no sponsorship; unknown citizenship is not a failure of a no-sponsorship condition."
+    },
+    {
+      "id": "ind-04",
+      "description": "Requirements\nUS citizenship required.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "authorization",
+          "mandatory",
+          []
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "review",
+      "why": "Citizenship is unknown. Work authorization and no sponsorship need do not establish US citizenship, so this mandatory condition cannot be confirmed."
+    },
+    {
+      "id": "ind-05",
+      "description": "Requirements\nPython required.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "Python"
+          ]
+        ]
+      ],
+      "job_patch": {
+        "title": "Senior Software Engineer"
+      },
+      "profile_patch": {},
+      "expected": "reject",
+      "why": "The user excludes senior-level roles; the explicit Senior Software Engineer title violates that rule regardless of Python evidence."
+    },
+    {
+      "id": "ind-06",
+      "description": "This employer is a government contractor.",
+      "segments": [
+        [
+          "s0",
+          "contracting",
+          "unknown",
+          []
+        ]
+      ],
+      "job_patch": {
+        "government_contracting": true
+      },
+      "profile_patch": {},
+      "expected": "reject",
+      "why": "The user excludes government-contracting employers; the explicit government_contracting flag is true."
+    },
+    {
+      "id": "ind-07",
+      "description": "Requirements\nMust start by November 2026.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "timing",
+          "mandatory",
+          []
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "reject",
+      "why": "The mandatory latest start is in November 2026, before the candidate earliest availability month of December 2026."
+    },
+    {
+      "id": "ind-08",
+      "description": "Requirements\nMust start by December 1, 2026.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "timing",
+          "mandatory",
+          []
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "review",
+      "why": "Availability is known only to the month December 2026. A December 1 deadline cannot be confirmed without an availability day."
+    },
+    {
+      "id": "ind-09",
+      "description": "Requirements\nPython required.\nPreferred Qualifications\nRust preferred.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "Python"
+          ]
+        ],
+        [
+          "s2",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s3",
+          "skill",
+          "preferred",
+          [
+            "Rust"
+          ]
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "eligible",
+      "why": "Python is demonstrated. Unsupported Rust is explicitly preferred, and preferred skills do not disqualify the candidate."
+    },
+    {
+      "id": "ind-10",
+      "description": "Requirements\nRust required.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "Rust"
+          ]
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "review",
+      "why": "The candidate evidence supports only Python and React. Mandatory Rust is unsupported and must be reviewed rather than inferred from another language."
+    },
+    {
+      "id": "ind-11",
+      "description": "Requirements\nAdvanced Python expertise required.",
+      "segments": [
+        [
+          "s0",
+          "none",
+          "unknown",
+          []
+        ],
+        [
+          "s1",
+          "skill",
+          "mandatory",
+          [
+            "Python"
+          ]
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "review",
+      "why": "Built a Python API. establishes Python use but does not establish advanced expertise; the mandatory depth remains unsupported."
+    },
+    {
+      "id": "ind-12",
+      "description": "Python experience is expected.",
+      "segments": [
+        [
+          "s0",
+          "skill",
+          "unknown",
+          [
+            "Python"
+          ]
+        ]
+      ],
+      "job_patch": {},
+      "profile_patch": {},
+      "expected": "review",
+      "why": "The requirement importance is explicitly unknown. The user rule sends ambiguous requirement classification to review even when the named skill is demonstrated."
+    }
+  ]
+}

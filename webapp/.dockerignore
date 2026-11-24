@@ -1,0 +1,6 @@
+.git
+.depth-engine
+tests
+__pycache__
+*.pyc
+.DS_Store

@@ -1,0 +1,67 @@
+{
+  "synthetic": true,
+  "approved": true,
+  "version": "sample-v1",
+  "name": "José Example (SAMPLE)",
+  "email": "sample@example.invalid",
+  "education": "Sample University | B.S. Computer Science | 2026",
+  "skills": [
+    "Python",
+    "SQL",
+    "Testing",
+    "JavaScript"
+  ],
+  "groups": {
+    "api": "Course Project - API",
+    "ui": "Course Project - Web UI"
+  },
+  "facts": {
+    "f1": {
+      "group": "api"
+    },
+    "f2": {
+      "group": "ui"
+    }
+  },
+  "variants": [
+    {
+      "id": "api-tests",
+      "group": "api",
+      "facts": [
+        "f1"
+      ],
+      "text": "Built a Python API with SQLite transactions and integration tests.",
+      "skills": [
+        "Python",
+        "SQL",
+        "Testing"
+      ]
+    },
+    {
+      "id": "ui-form",
+      "group": "ui",
+      "facts": [
+        "f2"
+      ],
+      "text": "Implemented JavaScript form validation and accessible error messages.",
+      "skills": [
+        "JavaScript"
+      ]
+    }
+  ],
+  "locations": [
+    "NYC",
+    "Seattle",
+    "California",
+    "Boston",
+    "Jersey City",
+    "DMV",
+    "Chicago",
+    "Texas",
+    "Florida"
+  ],
+  "needs_sponsorship": false,
+  "graduation_year": 2026,
+  "experience_years": 0,
+  "approval_basis": "Synthetic fixture only; not operator facts"
+}

@@ -1,0 +1,60 @@
+{
+  "synthetic": true,
+  "fixture_clock": "2026-10-15T12:00:00Z",
+  "jobs": [
+    {
+      "synthetic": true,
+      "id": "sample-api-001",
+      "employer": "Sample Employer",
+      "title": "New Grad Software Engineer",
+      "url": "https://example.invalid/jobs/sample-api-001",
+      "location": "NYC",
+      "description": "Build APIs and tests",
+      "source_hash": "db4db9f030784e2ef3ca99c98085f2a136c604023974d26e0290b786620652f7",
+      "government_contracting": false,
+      "sponsorship": "unknown",
+      "graduation_years": [
+        2026
+      ],
+      "min_years": 0,
+      "employment_type": "FullTime",
+      "is_listed": true,
+      "source_observed_at": "2026-10-15T12:00:00Z",
+      "published_at": "2026-10-15T11:30:00Z",
+      "publication_semantics": "original",
+      "active": true,
+      "bootstrap": true,
+      "required_skills": [
+        "Python",
+        "SQL",
+        "Testing"
+      ]
+    },
+    {
+      "synthetic": true,
+      "id": "sample-ui-002",
+      "employer": "Sample Employer",
+      "title": "Junior Software Engineer - Web (SAMPLE)",
+      "url": "https://example.invalid/jobs/sample-ui-002",
+      "location": "NYC",
+      "description": "Implement JavaScript web interfaces and validation.",
+      "source_hash": "ca94847c98753dc6c0f0ac543bb43dc511a83728d348f93b5a673ea62ed98c79",
+      "government_contracting": false,
+      "sponsorship": "unknown",
+      "graduation_years": [
+        2026
+      ],
+      "min_years": 0,
+      "employment_type": "FullTime",
+      "is_listed": true,
+      "source_observed_at": "2026-10-15T12:00:00Z",
+      "published_at": "2026-10-15T11:30:00Z",
+      "publication_semantics": "original",
+      "active": true,
+      "bootstrap": true,
+      "required_skills": [
+        "JavaScript"
+      ]
+    }
+  ]
+}

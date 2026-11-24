@@ -1,0 +1,7 @@
+{
+  "name": "local.jobs.portal_autofill",
+  "description": "One-use credential for an armed employer account form",
+  "path": "native_host.py",
+  "type": "stdio",
+  "allowed_origins": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "apply-driver",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deterministic Workday application driver (drives the installed Google Chrome).",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "playwright": "^1.65.1"
+  }
+}

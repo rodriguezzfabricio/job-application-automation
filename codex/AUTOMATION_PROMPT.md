@@ -1,0 +1,1 @@
+Run the job worker from this checkout using the private directory configured by its owner. Start with `codex/jr gate` and [the worker brief](BRIEF.md). Respect the active lease, eligible opening set, available budget and current dashboard settings. Save private proof locally and report the outcome using labels and receipt references.

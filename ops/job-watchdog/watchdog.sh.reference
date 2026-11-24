@@ -1,0 +1,63 @@
+#!/bin/zsh
+# Job automation watchdog (lives outside ~/Desktop so launchd may run it without TCC prompts).
+#   stuck:   a run started (run-state.json) and has not finished after 45 min (FAST) or 70 min (FULL)
+#   stopped: no run finished for 60 min (usage limit, app closed, Mac asleep, crash)
+#   browser: runs finish but the browser part has not worked for 120 min
+# Each kind alerts at most once per 2 hours; a recovery after an alert sends one "back to normal".
+set -u
+D="$HOME/Library/Application Support/job-watchdog"
+LOG="$D/watchdog.log"; OUT="$D/outbox"; mkdir -p "$OUT"
+now_min=$(( $(date +%H) * 60 + $(date +%M) ))
+if (( now_min < 390 )); then exit 0; fi
+read -r run_age browser_age stuck_min mode <<< "$(/usr/bin/python3 - "$D/desktop-state.json" "$D/run-state.json" <<'PY'
+import json, sys, datetime
+now = datetime.datetime.now(datetime.timezone.utc)
+def age(s):
+    try:
+        return int((now - datetime.datetime.fromisoformat(s.replace("Z", "+00:00"))).total_seconds() // 60)
+    except Exception:
+        return 99999
+try:
+    d = json.load(open(sys.argv[1]))
+except Exception:
+    d = {}
+try:
+    r = json.load(open(sys.argv[2]))
+except Exception:
+    r = {}
+run = age(d.get("last_success_at", ""))
+browser = age(d.get("browser_last_success_at") or d.get("last_success_at", ""))
+started, finished = r.get("started_at", ""), r.get("finished_at", "")
+stuck = age(started) if started and (not finished or finished < started) else 0
+print(run, browser, stuck, r.get("mode", "?"))
+PY
+)"
+alert() {  # kind, message
+  local stamp="$D/last-alert-$1"
+  if [[ -f "$stamp" ]] && (( $(date +%s) - $(cat "$stamp") < 7200 )); then return; fi
+  date +%s > "$stamp"
+  echo "$(date '+%Y-%m-%d %H:%M') ALERT $1: $2" >> "$LOG"
+  print -r -- "$2" > "$D/.w$$" && mv "$D/.w$$" "$OUT/$(date +%Y%m%d-%H%M%S)-watchdog-$1.txt"
+  /usr/bin/osascript -e "display notification \"$2\" with title \"Job automation\" sound name \"Basso\"" 2>/dev/null
+}
+hhmm=$(date +%H:%M)
+# alarm went off on a FULL run that was still working)
+limit=45; [[ "$mode" == "FULL" ]] && limit=70
+if (( stuck_min > limit )); then
+  alert stuck "[Jobs $hhmm] A $mode run has been stuck for ${stuck_min} min, so no jobs are being applied to. Open the Claude app on the Mac and check the Jobs task; the next run starts by itself."
+elif (( run_age > 60 )); then
+  alert stopped "[Jobs $hhmm] No job run has finished in ${run_age} min. Usual causes: Claude usage limit, the Claude app closed, or Brave closed. Runs restart by themselves when the limit resets."
+elif (( browser_age > 120 )); then
+  alert browser "[Jobs $hhmm] Runs finish but LinkedIn/Handshake have not been checked for ${browser_age} min. Check that Brave is open with the Claude extension connected."
+else
+  # recovered: tell him once if anything had been alerted
+  for k in stuck stopped browser; do
+    if [[ -f "$D/last-alert-$k" ]]; then
+      rm -f "$D/last-alert-$k"
+      echo "$(date '+%Y-%m-%d %H:%M') recovered from $k" >> "$LOG"
+      print -r -- "[Jobs $hhmm] Back to normal: a run finished ${run_age} min ago." > "$D/.r$$" && mv "$D/.r$$" "$OUT/$(date +%Y%m%d-%H%M%S)-watchdog-ok.txt"
+    fi
+  done
+  echo "$(date '+%Y-%m-%d %H:%M') ok run=${run_age}m browser=${browser_age}m stuck=${stuck_min}m" >> "$LOG"
+fi
+exit 0

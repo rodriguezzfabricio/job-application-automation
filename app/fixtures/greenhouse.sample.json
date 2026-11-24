@@ -1,0 +1,25 @@
+{
+  "synthetic": true,
+  "provenance": {
+    "sample_only": true
+  },
+  "job": {
+    "id": 10001,
+    "title": "Software Engineer I",
+    "company_name": "Example Workshop",
+    "location": {
+      "name": "Remote, US"
+    },
+    "absolute_url": "https://job-boards.greenhouse.io/example/jobs/10001",
+    "first_published": "2026-10-15T15:00:00Z",
+    "updated_at": "2026-10-15T15:00:00Z",
+    "content": "<p>Build reporting tools. Python is required.</p>",
+    "metadata": [],
+    "departments": [
+      {
+        "name": "Engineering"
+      }
+    ],
+    "offices": []
+  }
+}

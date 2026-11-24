@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+bundled_python="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+if [ -x "$script_dir/.venv/bin/python" ]; then
+  task_python="$script_dir/.venv/bin/python"
+elif [ -x "$bundled_python" ]; then
+  task_python="$bundled_python"
+else
+  task_python=python3
+fi
+if [ "$#" -eq 0 ]; then set -- demo; fi
+exec "$task_python" "$script_dir/main.py" "$@"

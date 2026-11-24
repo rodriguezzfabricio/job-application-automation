@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>local.jobtools.claude-keepalive</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/zsh</string>
+		<string>-c</string>
+		<string>h=$(date +%H); if [ "$h" -ge 5 ] &amp;&amp; [ "$h" -le 22 ]; then ps -axo comm | grep -q "^/Applications/Claude.app/Contents/MacOS/Claude$" || /usr/bin/open -g -a Claude; ps -axo comm | grep -q "Brave Browser.app/Contents/MacOS/Brave Browser$" || /usr/bin/open -g -a "Brave Browser"; fi</string>
+	</array>
+	<key>StartInterval</key>
+	<integer>600</integer>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>
